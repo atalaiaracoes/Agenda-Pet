@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<hr>
+
+<table class="table table-responsive-sm table-sm table-hover">
+	<thead>
+	    <tr>
+	    	<br>
+	    	<th scope="col" class="text-center align-middle">Raça</th>
+	    	<th scope="col" class="text-center align-middle">Tipo do Pet</th>
+	    	<th scope="col" class="text-center align-middle">Porte (Adulto)</th>
+	    	<th scope="col" class="text-center align-middle">Opções</th>
+	    </tr>
+	</thead>
+	<tbody>
+		{% for rac in raca %}
+			<tr>
+				<td class="text-center align-middle">{{ rac.raca }}</td>
+				<td class="text-center align-middle">{{ rac.tipo }}</td>
+		    	<td class="text-center align-middle">{{ rac.porte }}</td>
+		    	<td class="text-center align-middle"><a href="/agenda/cadraca/?id={{ rac.id }}">Alterar Cadastro</a></td>
+		    </tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

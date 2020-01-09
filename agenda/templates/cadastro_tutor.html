@@ -1,0 +1,110 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<hr><hr><hr>
+
+<div class="container">
+	<div class="col-md-8 order-md-2">
+		<h2>Cadastro do Tutor</h2>
+		<br>
+	</div>
+</div>
+
+	<div class="container">
+		<div class="col-md order-md-2">
+
+			{% if erro %}
+				<p>Ocorreu um erro: {{ erro }}</p>
+			{% endif %}
+
+        	<form class="needs-validation" method="POST" action="/agenda/cadtutor/submit" novalidate>
+          		{% csrf_token %}
+
+          		<div class="row" hidden>
+	              	<div class="col-md-8 mb-3">
+          				<input type="text" class="form-control" name="tutorid" value="{{ alttutor.id }}" hidden>
+          			</div>
+          		</div>
+
+	            <div class="row">
+	              	<div class="col-md-6 mb-3">
+	                	<label for="tutor">Nome do Tutor</label>
+	                	<input type="text" class="form-control" name="tutor" placeholder="" value="{{ alttutor.tutor }}" required>
+	                	{% if form.error %}
+	                	<div class="invalid-feedback">
+	                  		{{ form.error }}}
+	                	</div>
+	                	{% endif %}
+	            	</div>	
+	            	<div class="col-md-2 mb-3">
+	                	<label for="cpf">CPF do Tutor</label>
+	                	<input type="text" class="form-control" name="cpf" placeholder="" value="{{ alttutor.cpf }}" required>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o nome do tutor.
+	                	</div>
+	            	</div>            	
+	            </div>
+
+	            <div class="row">
+	            	<div class="col-md-2 mb-3">
+	                	<label for="telprin">Telefone Principal</label>
+	                	<input type="text" class="form-control" name="telprin" placeholder="" value="{{ alttutor.tel_principal }}" required>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o telefone do cliente.
+	                	</div>
+	              	</div>
+	            	<div class="col-md-2 mb-3">
+	                	<label for="telalt">Telefone Alternativo</label>
+	                	<input type="text" class="form-control" name="telalt" placeholder="" value="{{ alttutor.tel_alternativo }}" required>
+	              	</div>
+	              	<div class="col-md-4 mb-3">
+	                	<label for="email">E-mail</label>
+	                	<input type="email" class="form-control" name="email" placeholder="" value="{{ alttutor.email }}" required>
+	              	</div>
+	            </div>
+
+	            <div class="row">
+	            	<div class="col-md-5 mb-3">
+	                	<label for="contalt">Contato Alternativo</label>
+	                	<input type="text" class="form-control" name="contalt" placeholder="" value="{{ alttutor.cont_alternativo }}" required>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o nome de um responsável alternativo.
+	                	</div>
+	              	</div>
+	            	<div class="col-md-3 mb-3">
+	                	<label for="telcont">Telefone do Contato</label>
+	                	<input type="text" class="form-control" name="telcont" placeholder="" value="{{ alttutor.tel_contato }}" required>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o telefone do responsável alternativo.
+	                	</div>
+	              	</div>
+	            </div>
+
+	            <div class="row">
+			        <div class="col-md-8 mb-3">
+			            <label for="observacao">Observação</label>
+			            <textarea name="observacao" class="form-control" rows="4" cols="100">{{ alttutor.observacao }}</textarea>
+			            </div>
+			    </div>
+
+			    <div class="row">
+			    	<div class="col-md-3 mb-3"></div>
+			    	<div class="col-md-3 mb-3"></div>
+				    <div class="col-md-1 mb-3">
+				       	<a href="/agenda/listtutor/" class="btn btn-warning">Cancelar</a>
+				    </div>
+				    <div class="col-md-1 mb-3">
+				       	<button class="btn btn-primary" type="submit">
+				       	{% if alttutor %}
+				       		Alterar
+				       	{% else %}
+				       		Salvar
+				       	{% endif %}
+				       	</button>
+				    </div>
+				</div>			           
+          	</form>	
+        </div>
+  	</div>
+{% endblock %}

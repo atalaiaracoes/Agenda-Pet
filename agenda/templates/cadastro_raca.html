@@ -1,0 +1,88 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<hr><hr><hr>
+
+<div class="container">
+	<div class="col-md-8 order-md-2">
+		<h2>Cadastro da Raça</h2>
+		<br>
+	</div>
+</div>
+
+	<div class="container">
+		<div class="col-md order-md-2">
+          
+			{% if erro %}
+				<p>Ocorreu um erro: {{ erro }}</p>
+			{% endif %}
+
+        	<form class="needs-validation" method="POST" action="/agenda/cadraca/submit" novalidate>
+          		{% csrf_token %}
+          		<div class="row" hidden>
+	              	<div class="col-md-8 mb-3">
+          				<input type="text" class="form-control" name="racaid" value="{{ altraca.id }}" hidden>
+          			</div>
+          		</div>
+	            <div class="row">
+	              	<div class="col-md-3 mb-3">
+	                	<label for="raca">Nome da Raça</label>
+	                	<input type="text" class="form-control" name="raca" value="{{ altraca.raca }}" required>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o nome da raça.
+	                	</div>
+	            	</div>
+	            	<div class="col-md-2 mb-3">
+	                	<label for="tipo">Tipo do Pet</label>
+	                	<select class="form-control" name="tipo">
+	                		{% if altraca.tipo %}
+	                			<option value="{{ altraca.tipo }}" selected>{{ altraca.tipo }}</option>
+	                		{% endif %}
+  							<option value="-------">-------</option>
+  							<option value="Cachorro">Cachorro</option>
+  							<option value="Gato">Gato</option>
+  						</select>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o tipo da raça.
+	                	</div>
+	              	</div>
+	            	<div class="col-md-2 mb-3">
+	                	<label for="porte">Porte da Raça</label>
+	                	<select class="form-control" name="porte">
+	                		{% if altraca.porte %}
+	                			<option value="{{ altraca.porte }}" selected>{{ altraca.porte }}</option>
+	                		{% endif %}
+  							<option value="-------">-------</option>
+  							<option value="Pequeno">Pequeno</option>
+  							<option value="Médio">Médio</option>
+  							<option value="Grande">Grande</option>
+  							<option value="Gigante">Gigante</option>
+						</select>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o porte da raça.
+	                	</div>
+	              	</div>	            	
+	            </div>
+
+			    <div class="row">
+			    	<div class="col-md-2 mb-3"></div>
+			    	<div class="col-md-2 mb-3"></div>
+			    	<div class="col-md-1 mb-3"></div>
+				    <div class="col-md-1 mb-3">
+				       	<a href="/agenda/listraca/" class="btn btn-warning">Cancelar</a>
+				    </div>
+				    <div class="col-md-1 mb-3">
+				       	<button class="btn btn-primary" type="submit">
+				       	{% if altraca %}
+				       		Alterar
+				       	{% else %}
+				       		Salvar
+				       	{% endif %}
+				       	</button>
+				    </div>
+				</div> 			           
+          	</form>	
+        </div>
+  	</div>
+{% endblock %}

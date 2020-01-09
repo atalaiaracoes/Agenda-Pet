@@ -1,0 +1,188 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<hr><hr><hr>
+
+<div class="container">
+	<div class="col-md-8 order-md-2">
+		<h2>Cadastro do Pet</h2>
+		<br>
+	</div>
+</div>
+
+	<div class="container">
+		<div class="col-md order-md-2">
+          
+			{% if erro %}
+				<p>Ocorreu um erro: {{ erro }}</p>
+			{% endif %}
+          
+        	<form class="needs-validation" method="POST" action="/agenda/cadpet/submit" novalidate>
+          		{% csrf_token %}
+          		<div class="row" hidden>
+	              	<div class="col-md-8 mb-3">
+          				<input type="text" class="form-control" name="petid" value="{{ altpet.id }}" hidden>
+          			</div>
+          		</div>
+	            <div class="row">
+	              	<div class="col-md-2 mb-3">
+	                	<label for="nomepet">Nome do Pet</label>
+	                	<input type="text" class="form-control" name="nomepet" placeholder="" value="{{ altpet.pet }}" required>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o nome do pet.
+	                	</div>
+	            	</div>
+	            	<div class="col-md-2 mb-3">
+	                	<label for="tipopet">Tipo do Pet</label>
+	                	<select class="form-control" name="tipopet">
+	                		{% if altpet.tipo %}
+	                			<option value="{{ altpet.tipo }}" selected>{{ altpet.tipo }}</option>
+	                		{% endif %}
+	  						<option>-------</option>
+	  						<option>Cachorro</option>
+	  						<option>Gato</option>
+						</select>
+	                	<div class="invalid-feedback">
+	                		É obrigatório inserir o tipo do pet.
+	                	</div>
+	            	</div>
+	            	<div class="col-md-4 mb-3">
+	                	<label for="racapet">Raça do Pet</label>
+	                	<select class="form-control" name="racapet">
+	                		{% if altpet.raca %}
+	                			<option value="{{ altpet.raca }}" selected>({{ altpet.tipo }}) {{ altpet.raca }}</option>
+	                		{% endif %}
+	  						<option>-------</option>
+	                		{% for raca in racas %}
+  								<option value="{{ raca.raca }}">({{ raca.tipo }}) {{ raca.raca }}</option>
+	                		{% endfor %}        	
+						</select>
+	                	<div class="invalid-feedback">
+	                		É obrigatório inserir o tipo do pet.
+	                	</div>
+	            	</div>
+	            </div>
+
+	            <div class="row">
+	            	<div class="col-md-2 mb-3">
+	                	<label for="tamanhopet">Tamanho</label>
+	                	<select class="form-control" name="tamanhopet" id="tamanhopet">
+  							{% if altpet.tamanho %}
+  								<option value="{{ altpet.tamanho }}" selected>{{ altpet.tamanho }}</option>	
+  							{% endif %}
+  							<option value="-------">-------</option>
+  							<option value="Filhote">Filhote</option>
+  							<option value="Pequeno">Pequeno</option>
+  							<option value="Médio">Médio</option>
+  							<option value="Grande">Grande</option>
+  							<option value="Gigante">Gigante</option>
+						</select>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o tamanho do pet.
+	                	</div>
+	              	</div>
+	            	<div class="col-md-2 mb-3">
+	                	<label for="corpet">Cor</label>
+	                	<input type="text" class="form-control" name="corpet" placeholder="" value="{{ altpet.cor }}" required>
+	                	<div class="invalid-feedback">
+	                    	É obrigatório inserir o cor do pet.
+	                	</div>
+	            	</div>
+	              	<div class="col-md-4 mb-3">
+			            <label for="dtnascimento">Data de Nascimento</label>
+			            {% if altpet.dt_nascimento %}
+			            	<input type="text" class="form-control" name="dtnascimento" placeholder="" value="{{ altpet.dt_nascimento }}" required>
+			            {% else %}
+			            	<input type="date" class="form-control" name="dtnascimento" placeholder="" required>
+			            {% endif %}
+			            <div class="invalid-feedback">
+			            	Informar a data de nascimento do pet.
+			            </div>
+			       	</div>
+	            </div>
+
+	            <div class="row">
+			        <div class="col-md-8 mb-3">
+			            <label for="tutor">Tutor</label>
+			            <select class="form-control" name="tutor">
+  							{% if altpet.tutor %}
+  								<option value="{{ altpet.tutor }}" selected>{{ altpet.tutor }}</option>
+  							{% endif %}
+  							<option>-------</option>
+  							{% for tut in tutor %}
+  								<option value="{{ tut.tutor }}">{{ tut.tutor }} [CPF: {{ tut.cpf }}]</option>
+  							{% endfor %}
+						</select>
+			        </div>
+			    </div>
+
+			    <div class="row">
+			        <div class="col-md-3 mb-3">
+			            <label>Pet com Alergia(s): </label>
+			            <div class="form-check form-check-inline" name="petalerg">
+	  						<select name="petalerg" id="petalerg">
+	  							{% if altpet.pet_alergico %}
+	  								{% if altpet.pet_alergico == 1%}
+	  									<option value="True">Sim</option>
+	  									<option value="False">Não</option>
+	  								{% else %}
+	  									<option value="False">Não</option>
+	  									<option value="True">Sim</option>
+	  								{% endif %}	  									  								
+	  							{% endif %}
+	  							<option value="False">Não</option>
+	  							<option value="True">Sim</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+			        <div class="col-md-5 mb-3">
+			            <label>Pet com Problema Cardíaco: </label>
+			            <div class="form-check form-check-inline" name="petcard">
+	  						<select name="petcard" id="petcard">
+	  							{% if altpet.pet_cardiaco %}
+	  								{% if altpet.pet_cardiaco == 1 %}
+	  									<option value="True">Sim</option>
+	  									<option value="False">Não</option>
+	  								{% else %}
+	  									<option value="False">Não</option>
+	  									<option value="True">Sim</option>
+	  								{% endif %}	  									  								
+	  							{% endif %}
+	  							<option value="False">Não</option>
+	  							<option value="True">Sim</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+	            <div class="row">
+			        <div class="col-md-8 mb-3">
+			            <label for="observacao">Observação</label>
+			            <textarea name="observacao" class="form-control" rows="3" cols="100">{{ altpet.observacao }}</textarea>
+			            </div>
+			    </div>
+
+	            <div class="row">
+			    	<div class="col-md-3 mb-3"></div>
+			    	<div class="col-md-3 mb-3"></div>
+				    <div class="col-md-1 mb-3">
+				       	<a href="/agenda/listpet/" class="btn btn-warning">Cancelar</a>
+				    </div>
+				    <div class="col-md-1 mb-3">
+				       	<button class="btn btn-primary" type="submit">
+				       	{% if altpet %}
+				       		Alterar
+				       	{% else %}
+				       		Salvar
+				       	{% endif %}
+				       	</button>
+				    </div>
+				</div> 			           
+          	</form>	
+        </div>
+  	</div>
+{% endblock %}

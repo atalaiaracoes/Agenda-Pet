@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<hr>
+
+<table class="table table-responsive-sm table-sm table-hover">
+	<thead>
+	    <tr>
+	    	<br>
+	    	<th scope="col" class="text-center align-middle">Código do Serviço</th>
+	    	<th scope="col" class="text-center align-middle">Descrição do Serviço</th>
+	    	<th scope="col" class="text-center align-middle">Tipo do Pet</th>
+	    	<th scope="col" class="text-center align-middle">Tamanho do Pet</th>
+	    	<th scope="col" class="text-center align-middle">Valor do Serviço</th>
+	    	<th scope="col" class="text-center align-middle">Ativo</th>
+	    	<th scope="col" class="text-center align-middle">Opções</th>
+	    </tr>
+	</thead>
+	<tbody>
+		{% for ser in servico %}
+		<tr>
+			<td class="text-center align-middle">{{ ser.codigo }}</td>
+	        <td class="text-center align-middle">{{ ser.servico }}</td>
+	        <td class="text-center align-middle">{{ ser.tipo }}</td>
+	        <td class="text-center align-middle">{{ ser.tamanho }}</td>
+	        <td class="text-center align-middle">R$ {{ ser.valor }}</td>
+	        {% if ser.ativo == 1 %}
+	        	<td class="text-center align-middle">Sim</td>
+	        {% else %}
+	        	<td class="text-center align-middle">Não</td>
+	        {% endif %}
+	        <td class="text-center align-middle"><a href="/servicos/cadservico/?id={{ ser.id }}">Alterar</a></td>
+		</tr>
+		{% endfor %}
+	
+	</tbody>
+
+</table>
+{% endblock %}

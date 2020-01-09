@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<hr>
+
+<table class="table table-responsive-sm table-sm table-hover">
+	<thead>
+	    <tr>
+	    	<br>
+	    	<th scope="col" class="text-center align-middle">Nome do Pet</th>
+	    	<th scope="col" class="text-center align-middle">Raça</th>
+	    	<th scope="col" class="text-center align-middle">Cor</th>
+	    	<th scope="col" class="text-center align-middle">Tamanho</th>
+	    	<th scope="col" class="text-center align-middle">Alérgico?</th>
+	    	<th scope="col" class="text-center align-middle">Cardíaco?</th>
+	    	<th scope="col" class="text-center align-middle">Idade</th>
+	    	<th scope="col" class="text-center align-middle">Tutor</th>
+	    	<th scope="col" class="text-center align-middle">Contato do Tutor</th>
+	    	<th scope="col" class="text-center align-middle">Opções</th>
+	    </tr>
+	</thead>
+	<tbody>
+		{% for pets in pet %}
+		<tr>
+			<td class="text-center align-middle">{{ pets.pet }}</td>
+	        <td class="text-center align-middle">{{ pets.raca }}</td>
+	        <td class="text-center align-middle">{{ pets.cor }}</td>
+	        <td class="text-center align-middle">{{ pets.tamanho }}</td>
+	        {% if pets.pet_alergico == 1 %}
+	      		<td class="text-center align-middle">Sim</td>
+	      	{% else %}
+	      		<td class="text-center align-middle">Não</td>
+	      	{% endif %}
+	      	{% if pets.pet_cardiaco == 1 %}
+	      		<td class="text-center align-middle">Sim</td>
+	      	{% else %}
+	      		<td class="text-center align-middle">Não</td>
+	      	{% endif %}
+	      	{% for lt in idade %}
+	      		{% if lt.0 == pets.id %}
+	      			{% if lt.1 > 0 %}
+	      	    		<td class="text-center align-middle">{{ lt.1 }} anos</td>
+	      			{% else %}
+	      				<td class="text-center align-middle">-------</td>
+	      			{% endif %}
+	      		{% endif %}
+	        {% endfor %}
+	        <td class="text-center align-middle">
+	        	{% for tut in tutor %}
+	        		{% if tut.tutor == pets.tutor %}
+	        			{{ tut.tutor }}
+	    			{% endif %}
+	    		{% endfor %}
+	        </td>
+	        <td class="text-center align-middle">
+	        	{% for tut in tutor %}
+	        		{% if tut.tutor == pets.tutor %}
+	        			{{ tut.tel_principal }}
+	    			{% endif %}
+	    		{% endfor %}
+	        </td>
+	        <td class="text-center align-middle"><a href="/agenda/cadpet/?id={{ pets.id }}">Alterar Cadastro</a></td>
+		</tr>
+		{% endfor %}
+	
+	</tbody>
+
+</table>
+{% endblock %}

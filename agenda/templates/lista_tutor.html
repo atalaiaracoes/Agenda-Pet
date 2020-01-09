@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<hr>
+
+<table class="table table-responsive-sm table-sm table-hover">
+	<thead>
+	    <tr>
+	    	<br>
+	    	<th scope="col" class="text-center align-middle">Nome do Tutor</th>
+	    	<th scope="col" class="text-center align-middle">CPF</th>
+	    	<th scope="col" class="text-center align-middle">E-mail</th>
+	    	<th scope="col" class="text-center align-middle">Telefone Principal</th>
+	    	<th scope="col" class="text-center align-middle">Telefone Alternativo</th>
+	    	<th scope="col" class="text-center align-middle">Contato Alternativo</th>
+	    	<th scope="col" class="text-center align-middle">Telefone de Contato</th>
+	    	<th scope="col" class="text-center align-middle">Pets</th>
+	    	<th scope="col" class="text-center align-middle">Opções</th>
+	    </tr>
+	</thead>
+	<tbody>
+		{% for tut in tutor%}
+		<tr>
+			<td class="text-center align-middle">{{ tut.tutor }}</td>
+			<td class="text-center align-middle">{{ tut.cpf }}</td>
+			<td class="text-center align-middle">{{ tut.email }}</td>
+	        <td class="text-center align-middle">{{ tut.tel_principal }}</td>
+	        <td class="text-center align-middle">{{ tut.tel_alternativo }}</td>
+	        <td class="text-center align-middle">{{ tut.cont_alternativo }}</td>
+	        <td class="text-center align-middle">{{ tut.tel_contato }}</td>
+	        <td class="text-center align-middle">
+	        	{% for pets in pet %}
+	        		{% if tut.tutor == pets.tutor %}
+	        			{{ pets.pet }},
+	    			{% endif %}
+	    		{% endfor %}
+	    	</td>
+	        <td class="text-center align-middle"><a href="/agenda/cadtutor/?id={{ tut.id }}">Alterar</a></td>
+		</tr>
+		{% endfor %}
+	
+	</tbody>
+
+</table>
+{% endblock %}

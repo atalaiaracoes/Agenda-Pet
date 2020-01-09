@@ -1,0 +1,118 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<hr><hr><hr>
+
+<div class="container">
+	<div class="col-md-8 order-md-2">
+		<h2>Cadastro do Serviço</h2>
+		<br>
+	</div>
+</div>
+
+	<div class="container">
+		<div class="col-md order-md-2">
+
+			{% if erro %}
+				<p>Ocorreu um erro: {{ erro }}</p>
+			{% endif %}
+          
+        	<form class="needs-validation" method="POST" action="/servicos/cadservico/submit" novalidate>
+          		{% csrf_token %}
+
+          		<div class="row" hidden>
+	              	<div class="col-md-8 mb-3">
+          				<input type="text" class="form-control" name="servicoid" value="{{ altservico.id }}" hidden>
+          			</div>
+          		</div>
+          
+        	<form class="needs-validation" method="POST" action="submit" novalidate>
+          		{% csrf_token %}
+	            <div class="row">
+	              	<div class="col-md-2 mb-3">
+	                	<label for="codserv">Código do Serviço</label>
+	                	<input type="text" class="form-control" name="codserv" placeholder="" value="{{ altservico.codigo }}" required>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o nome do tutor.
+	                	</div>
+	            	</div>
+	            	<div class="col-md-6 mb-3">
+	                	<label for="desserv">Descrição do Serviço</label>
+	                	<input type="text" class="form-control" name="desserv" placeholder="" value="{{ altservico.servico }}" required>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o telefone do cliente.
+	                	</div>
+	              	</div>	            	
+	            </div>
+
+	            <div class="row">
+	            	<div class="col-md-2 mb-3">
+	                	<label for="tampet">Tipo do Pet</label>
+	                		<select class="form-control" name="tipopet">
+	  							<option>-------</option>
+	  							<option>Cachorro</option>
+	  							<option>Gato</option>
+							</select>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o tamanho do pet.
+	                	</div>
+	              	</div>
+	            	<div class="col-md-2 mb-3">
+	                	<label for="tamanhopet">Tamanho do Pet</label>
+	                		<select class="form-control" name="tamanhopet">
+	  							<option>-------</option>
+	  							<option>Filhote</option>
+	  							<option>Pequeno</option>
+	  							<option>Médio</option>
+	  							<option>Grande</option>
+	  							<option>Gigante</option>
+							</select>
+	                	<div class="invalid-feedback">
+	                  		É obrigatório inserir o tamanho do pet.
+	                	</div>
+	              	</div>
+	            	<div class="col-md-2 mb-3">
+		            	<label for="valor">Valor do Serviço (R$)</label>
+		              	<input type="text" class="form-control" name="valor" value="{{ altservico.valor }}" placeholder="" required>
+		              	<div class="invalid-feedback">
+		                Colocar valor do serviço.
+		              	</div>
+		            </div>
+		            <div class="col-md-2 mb-3">
+		            	<label for="ativo">Serviço Ativo</label>
+		            	<div class="col-md-2 mb-2"></div>
+						<select name="ativo" id="ativo">
+  							<option value="True" selectted>Sim</option>
+  							<option value="False">Não</option>
+						</select>
+					</div>
+	            </div>
+
+	            <div class="row">
+			        <div class="col-md-8 mb-3">
+			            <label for="observacao">Observação</label>
+			            <textarea name="observacao" class="form-control" rows="4" cols="100">{{ altservico.observacao }}</textarea>
+			            </div>
+			    </div>
+
+			    <div class="row">
+			    	<div class="col-md-3 mb-3"></div>
+			    	<div class="col-md-3 mb-3"></div>
+				    <div class="col-md-1 mb-3">
+				       	<a href="/servicos/listservico" class="btn btn-warning">Cancelar</a>
+				    </div>
+				    <div class="col-md-1 mb-3">
+				       		<button class="btn btn-primary" type="submit">
+				       	{% if altservico %}
+				       		Alterar
+				       	{% else %}
+				       		Salvar
+				       	{% endif %}
+				       	</button>
+				    </div>
+				</div> 			           
+          	</form>	
+        </div>
+  	</div>
+{% endblock %}
