@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+import django_heroku
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'o)($7df0%uoz(7b3kbwkq8m=s$fimf9nr+)82cjgg@(u(z4x(*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.0.10.33','localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,8 +82,12 @@ WSGI_APPLICATION = 'base.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'agendapet.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd3hmorlf154bgj',
+        'USER': 'mcmcvceopfovwg',
+        'PASSWORD': 'dc154b027036e581045ef50fe3b77665a4755e5f68c5f0967dd29d6e8adea2bd',
+        'HOST': 'ec2-174-129-32-215.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -125,3 +131,5 @@ USE_TZ = True
 APPEND_SLASH = False
 
 STATIC_URL = '/static/'
+
+django_heroku.settings(locals())
