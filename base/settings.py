@@ -21,8 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o)($7df0%uoz(7b3kbwkq8m=s$fimf9nr+)82cjgg@(u(z4x(*'
+##
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,19 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'base.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'degte8lssj8pg9',
-        'USER': 'ysgmmexnfzntqw',
-        'PASSWORD': '27ba394fa8415135de0d2b83b2b4e7caed077a54f846b3cbd89a09e6013374a1',
-        'HOST': 'ec2-174-129-33-196.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+##
 
 
 # Password validation
