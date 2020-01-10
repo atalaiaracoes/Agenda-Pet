@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import CadastroTutor, CadastroPet, CadastroRaca
 from .models import Tutor, Pet, Raca
 from datetime import date
@@ -22,12 +23,13 @@ def calcula_idade(petidade):
 	return lista
 
 
-
+@login_required(login_url='/')
 def lista_raca(request):
 	raca = Raca.objects.all().order_by('tipo', 'raca')
 	context = {'raca': raca}
 	return render(request, 'lista_raca.html', context)
 
+@login_required(login_url='/')
 def lista_pet(request):
 	pet = Pet.objects.all()
 	tutor = Tutor.objects.all()
@@ -36,13 +38,14 @@ def lista_pet(request):
 	context = {'pet':pet, 'tutor': tutor, 'idade': idade}
 	return render(request, 'lista_pet.html', context)
 
+@login_required(login_url='/')
 def lista_tutor(request):
 	tutor = Tutor.objects.all()
 	pet = Pet.objects.all()
 	context = {'tutor': tutor, 'pet':pet}
 	return render(request, 'lista_tutor.html', context)
 
-
+@login_required(login_url='/')
 def cadastro_raca(request):
 	raca_id = request.GET.get('id')
 
@@ -61,6 +64,7 @@ def cadastro_raca(request):
 
 	return render(request, 'cadastro_raca.html', context)
 
+@login_required(login_url='/')
 def submit_raca(request):
 
 	raca_id = request.POST.get('racaid')
@@ -95,8 +99,7 @@ def submit_raca(request):
 	return redirect('/agenda/cadraca/')
 
 
-
-
+@login_required(login_url='/')
 def cadastro_tutor(request):
 	tutor_id = request.GET.get('id')
 	if tutor_id:
@@ -113,7 +116,7 @@ def cadastro_tutor(request):
 	context = {'form': CadastroTutor() }
 	return render(request, 'cadastro_tutor.html', context)
 
-
+@login_required(login_url='/')
 def submit_tutor(request):
 
 	tutor = request.POST.get('tutor')
@@ -159,7 +162,7 @@ def submit_tutor(request):
 		
 	return redirect('/agenda/cadpet/')
 
-
+@login_required(login_url='/')
 def cadastro_pet(request):
 	tutor = Tutor.objects.all().order_by('tutor')
 	racas = Raca.objects.all().order_by('tipo', 'raca')
@@ -180,7 +183,7 @@ def cadastro_pet(request):
 	return render(request, 'cadastro_pet.html', context)
 
 
-
+@login_required(login_url='/')
 def submit_pet(request):
 
 	pet_id = request.POST.get('petid')
