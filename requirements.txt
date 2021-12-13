@@ -24,7 +24,7 @@ IMAPClient==2.1.0
 ipaddress==1.0.22
 isodate==0.5.4
 linecache2==1.0.0
-lxml==4.3.3
+lxml==4.6.5
 Mako==1.0.6
 MarkupSafe==0.23
 meson==0.51.2
