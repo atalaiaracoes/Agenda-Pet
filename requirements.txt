@@ -44,7 +44,7 @@ Pygments==2.3.1
 pymssql==2.1.4
 pyOpenSSL==19.0.0
 pyparsing==2.3.1
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 PyQt5==5.12.2
 PyQt5-sip==4.19.17
 pyrsistent==0.14.2
