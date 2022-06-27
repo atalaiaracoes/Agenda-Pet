@@ -55,7 +55,7 @@ python-subunit==1.2.0
 pytz==2019.3
 pyxattr==0.6.0
 rdflib==4.2.2
-reportlab==3.5.13
+reportlab==3.5.55
 requests==2.21.0
 scour==0.36
 six==1.12.0
