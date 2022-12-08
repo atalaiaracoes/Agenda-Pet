@@ -1,7 +1,7 @@
 argcomplete==1.10.0
 beautifulsoup4==4.8.0
 bsddb3==6.2.4
-certifi==2019.6.16
+certifi==2022.12.7
 cffi==1.11.4
 chardet==3.0.4
 cryptography==2.8
